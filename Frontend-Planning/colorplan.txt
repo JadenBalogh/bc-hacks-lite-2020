@@ -1,0 +1,12 @@
+light brown background colour
+cmyk(5,20,40,20)
+rgb(195,164,121)
+
+dark brown - accent colour
+cmyk(20,70,90,70)
+rgb(97,51,24)
+
+medium green - main color of stuff
+rgb(102,141,60)
+
+whitesmoke for text
