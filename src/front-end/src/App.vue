@@ -15,9 +15,8 @@ export default {
     HelloWorld,
   },
   methods: {
-    get() {
+    getLocation() {
       navigator.geolocation.getCurrentPosition((position) => {
-
         console.log(position.coords);
       });
     },
