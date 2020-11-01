@@ -41,8 +41,8 @@ app.post('/create-room', jsonParser, function (req, res) {
 });
 
 // Firebase logic
-createRoom('test', 50, {lat:0, lon:0});
-getRoomsAtLocation({lat:0, lon:0}).then(rooms => {
+createRoom('test', 50, { lat: 0, lon: 0 });
+getRoomsAtLocation({ lat: 0, lon: 0 }).then((rooms) => {
   console.log(rooms);
 });
 
