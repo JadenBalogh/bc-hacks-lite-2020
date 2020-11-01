@@ -1,11 +1,11 @@
 // resources/js/components/ChatRoom.vue
 
 <template>
-  <div class="container">
+  <div class="container chatroom">
     <div class="row">
       <div class="col-md-3">
-        <div class="card">
-          <div class="card-header">Members</div>
+        <div class="card h-100">
+          <div class="card-header">Chatters</div>
 
           <div class="card-body">
             <ul class="list-group list-group-flush">
@@ -13,20 +13,26 @@
                 class="list-group-item"
                 v-for="(member, id) in members"
                 :key="id"
-              >{{ member.user.name }}</li>
+              >
+                {{ member.user.name }}
+              </li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="col-md-9">
+      <div class="col-md-9 h-100">
         <div class="card">
-          <div class="card-header">Chats</div>
+          <div class="card-header">Starbucks</div>
 
           <div class="card-body">
             <dl v-for="message in messages" v-bind:key="message.id">
-              <dt :class="{  'text-right': message.user.id === username }">{{ message.user.name }}</dt>
-              <dd :class="{  'text-right': message.user.id === username }">{{ message.text }}</dd>
+              <dt :class="{ 'text-right': message.user.id === username }">
+                {{ message.user.name }}
+              </dt>
+              <dd :class="{ 'text-right': message.user.id === username }">
+                {{ message.text }}
+              </dd>
             </dl>
 
             <hr />
@@ -51,6 +57,12 @@
     </div>
   </div>
 </template>
+<style>
+.chatroom {
+  margin-top: 2rem;
+  height: 500px;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -60,8 +72,8 @@ export default {
   props: {
     authUser: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -70,13 +82,13 @@ export default {
       members: [],
       client: null,
       messages: [],
-      newMessage: ""
+      newMessage: "",
     };
   },
   computed: {
     username() {
       return this.authUser.email.split("@")[0];
-    }
+    },
   },
   async created() {
     // gerenrate clientside token from server
@@ -87,13 +99,13 @@ export default {
   methods: {
     async getToken() {
       const { data } = await axios.post("/api/generate-token", {
-        user_id: this.username
+        user_id: this.username,
       });
       this.token = data.token;
     },
     async initializeStream() {
       this.client = new StreamChat(process.env.MIX_STREAM_API_KEY, {
-        timeout: 9000
+        timeout: 9000,
       });
       await this.client.setUser(
         { id: this.username, name: this.authUser.name },
@@ -106,23 +118,23 @@ export default {
       this.members = members;
       this.messages = messages;
       // listen for new messages
-      this.channel.on("message.new", event => {
+      this.channel.on("message.new", (event) => {
         this.messages.push({
           text: event.message.text,
-          user: event.message.user
+          user: event.message.user,
         });
       });
       // listen for when a new member is added to channel
-      this.channel.on("member.added", event => {
+      this.channel.on("member.added", (event) => {
         this.members.push(event);
       });
     },
     async sendMessage() {
       await this.channel.sendMessage({
-        text: this.newMessage
+        text: this.newMessage,
       });
       this.newMessage = "";
-    }
-  }
+    },
+  },
 };
 </script>
