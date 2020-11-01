@@ -1,11 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" width="40%" />
-    <HelloWorld
-      msg="War is peace,
-Freedom is slavery,
-Ignorance is strength"
-    />
+    <b-navbar toggleable="lg" type="dark" variant="secondary">
+      <b-navbar-brand href="#"
+        ><img
+          src="./assets/compass1.png"
+          style="width: 80px; margin-bottom: 15px"
+          alt="compass"
+        />
+        <span class="mt-auto" style="font-size: xx-large">
+          GeoChat</span
+        ></b-navbar-brand
+      >
+      <img class="ml-auto" src="./assets/github_iconSmall.png" />
+    </b-navbar>
+
+    <!-- <img alt="Vue logo" src="./assets/logo.png" />-->
+    <b-container class="" fluid>
+      <b-row>
+        <b-col cols="4">
+          <ChatRoomNav msg="Active Rooms" />
+          <ChatRoomNav msg="Available Rooms" />
+        </b-col>
+        <b-col cols="8">
+          <ChatRoom />
+          <HelloWorld />
+        </b-col>
+      </b-row>
+    </b-container>
+    <button v-on:click="getLocation">Get my location</button>
+    <a-date-picker :defaultValue="moment()" />
+
     <button v-on:click="getRoomsInMyArea">Get rooms in my area</button
     ><br /><br />
     <button v-on:click="createNewRoom">Create room</button><br /><br />
@@ -15,18 +39,27 @@ Ignorance is strength"
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import ChatRoomNav from "./components/ChatRoomNav.vue";
+import ChatRoom from "./components/ChatRoom.vue";
+import moment from "moment";
+import { version } from "ant-design-vue";
+
 import * as axios from "axios";
 
 export default {
   name: "App",
+
   components: {
-    HelloWorld,
+    ChatRoomNav,
+    ChatRoom,
   },
+
   data: function () {
     return {
       radius: null,
       roomName: "",
+      moment,
+      version,
     };
   },
   methods: {
@@ -65,12 +98,18 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i");
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.container {
+  max-width: 100%;
 }
 </style>
+
+

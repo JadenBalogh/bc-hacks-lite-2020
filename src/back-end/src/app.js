@@ -59,6 +59,10 @@ function createRoom(name, radius, center) {
   });
 }
 
+function deleteRoom(id) {
+  db.collection('rooms').doc(id).delete();
+}
+
 async function getRoomsAtLocation(location) {
   var rooms = [];
   await db
@@ -83,4 +87,32 @@ async function getRoomsAtLocation(location) {
       });
     });
   return rooms;
+}
+
+function addParticipantToRoom(id) {
+  var current = db
+    .collection('rooms')
+    .doc(id)
+    .get()
+    .then((result) => {
+      db.collection('rooms')
+        .doc(id)
+        .update({
+          participantCount: result.data().participantCount + 1,
+        });
+    });
+}
+
+function removeParticipantFromRoom(id) {
+  var current = db
+    .collection('rooms')
+    .doc(id)
+    .get()
+    .then((result) => {
+      db.collection('rooms')
+        .doc(id)
+        .update({
+          participantCount: result.data().participantCount - 1,
+        });
+    });
 }
