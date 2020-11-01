@@ -21,7 +21,9 @@
           <ChatRoomNav msg="Active Rooms" />
           <ChatRoomNav msg="Available Rooms" />
         </b-col>
-        <b-col cols="8"></b-col>
+        <b-col cols="8">
+          <ChatRoom />
+        </b-col>
       </b-row>
     </b-container>
     <button v-on:click="getLocation">Get my location</button>
@@ -31,6 +33,7 @@
 
 <script>
 import ChatRoomNav from "./components/ChatRoomNav.vue";
+import ChatRoom from "./components/ChatRoom.vue";
 import moment from "moment";
 import { version } from "ant-design-vue";
 
@@ -39,6 +42,7 @@ export default {
 
   components: {
     ChatRoomNav,
+    ChatRoom
   },
   data() {
     return {
