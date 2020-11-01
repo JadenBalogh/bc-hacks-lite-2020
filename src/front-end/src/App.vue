@@ -18,12 +18,11 @@
     <b-container class="" fluid>
       <b-row>
         <b-col cols="4">
-          <ChatRoomNav msg="Active Rooms" />
+          <ChatRoomNav msg="Active Rooms" testName="meow" />
           <ChatRoomNav msg="Available Rooms" />
         </b-col>
         <b-col cols="8">
           <ChatRoom />
-          <HelloWorld />
         </b-col>
       </b-row>
     </b-container>

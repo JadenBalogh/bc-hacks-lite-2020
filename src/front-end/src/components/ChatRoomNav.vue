@@ -1,6 +1,7 @@
 <template>
   <div class="chatRooms">
     <h4>{{ msg }}</h4>
+    {{ testName }}
     <b-table hover :items="items"></b-table>
   </div>
 </template>
@@ -16,8 +17,10 @@ export default {
       ],
     };
   },
+
   props: {
     msg: String,
+    testName: String,
   },
 };
 </script>
