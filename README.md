@@ -26,4 +26,4 @@ We all learned some new technology; primarily Firebase and the integration of ge
 We plan to complete the functionality of the app and test the concept in practice with some real people. If it turns out to be successful, we'll look at expanding to the mobile market and publishing it to an actual server.
 
 ## Contributors
-Created by Jaden Balogh, Jean-Philippe Abadir and Shawn Mountenay
+Created by Jaden Balogh, Jean-Philippe Abadir and Shawn Mountenay.
