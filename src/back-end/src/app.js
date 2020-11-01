@@ -1,3 +1,4 @@
+// Firebase initializations
 const firebase = require('firebase');
 require('firebase/firestore');
 firebase.initializeApp({
@@ -13,6 +14,7 @@ firebase.initializeApp({
 var db = firebase.firestore();
 const geolib = require('geolib');
 
+// Server initializations
 const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
@@ -21,6 +23,7 @@ const port = 3000;
 const jsonParser = bodyParser.json();
 app.use(cors());
 
+// Server logic
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
@@ -37,6 +40,7 @@ app.post('/create-room', jsonParser, function (req, res) {
   console.log(req.body);
 });
 
+// Firebase logic
 createRoom('test', 50, {lat:0, lon:0});
 getRoomsAtLocation({lat:0, lon:0}).then(rooms => {
   console.log(rooms);
