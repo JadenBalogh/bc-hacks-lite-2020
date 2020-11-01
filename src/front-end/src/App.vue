@@ -2,12 +2,13 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
-    <button v-on:click="getLocation">Get my location</button>
+    <button v-on:click="getRoomsInMyArea">Get my location</button>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
+import * as axios from "axios";
 
 export default {
   name: "App",
@@ -15,9 +16,17 @@ export default {
     HelloWorld,
   },
   methods: {
-    getLocation() {
+    getRoomsInMyArea() {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position.coords);
+        axios({
+          method: "post",
+          url: "http://localhost:3000",
+          data: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          },
+        });
       });
     },
   },
