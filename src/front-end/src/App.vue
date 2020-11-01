@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <b-navbar toggleable="lg" type="dark" variant="secondary">
       <b-navbar-brand href="#"
         ><img
@@ -24,50 +23,44 @@
         </b-col>
         <b-col cols="8">
           <ChatRoom />
+          <HelloWorld />
         </b-col>
       </b-row>
     </b-container>
     <button v-on:click="getLocation">Get my location</button>
     <a-date-picker :defaultValue="moment()" />
 
-
     <button v-on:click="getRoomsInMyArea">Get rooms in my area</button
     ><br /><br />
     <button v-on:click="createNewRoom">Create room</button><br /><br />
     <input v-model="radius" placeholder="room radius in meters" />
     <input v-model="roomName" placeholder="room name" />
-
   </div>
 </template>
 
 <script>
-
 import ChatRoomNav from "./components/ChatRoomNav.vue";
 import ChatRoom from "./components/ChatRoom.vue";
 import moment from "moment";
 import { version } from "ant-design-vue";
-=======
+
 import HelloWorld from "./components/HelloWorld.vue";
 import * as axios from "axios";
-
 
 export default {
   name: "App",
 
   components: {
     ChatRoomNav,
-    ChatRoom
+    ChatRoom,
   },
-  data() {
-    return {
-      moment,
-      version,
-    };
-  },
+
   data: function () {
     return {
       radius: null,
       roomName: "",
+      moment,
+      version,
     };
   },
   methods: {
