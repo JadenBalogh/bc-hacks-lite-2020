@@ -23,7 +23,6 @@
         </b-col>
         <b-col cols="8">
           <ChatRoom />
-          <HelloWorld />
         </b-col>
       </b-row>
     </b-container>
