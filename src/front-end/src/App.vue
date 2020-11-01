@@ -15,17 +15,17 @@
     </b-navbar>
 
     <!-- <img alt="Vue logo" src="./assets/logo.png" />-->
-    <b-container class="bv-example-row">
+    <b-container class="" fluid>
       <b-row>
         <b-col cols="2">
-          <ChatRoomNav msg="Chat Room Navigation" />
-
-          <button v-on:click="getLocation">Get my location</button>
-          <a-date-picker :defaultValue="moment()"
-        /></b-col>
+          <ChatRoomNav msg="Active Rooms" />
+          <ChatRoomNav msg="Available Rooms" />
+        </b-col>
         <b-col cols="10"></b-col>
       </b-row>
     </b-container>
+    <button v-on:click="getLocation">Get my location</button>
+    <a-date-picker :defaultValue="moment()" />
   </div>
 </template>
 
@@ -64,6 +64,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.container {
+  max-width: 100%;
 }
 </style>
 
