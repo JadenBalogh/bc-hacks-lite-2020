@@ -11,6 +11,7 @@ firebase.initializeApp({
   measurementId: 'G-M88VY6P805',
 });
 var db = firebase.firestore();
+const geolib = require('geolib');
 
 const express = require('express');
 var bodyParser = require('body-parser');
@@ -32,20 +33,42 @@ app.post('/', jsonParser, function (req, res) {
   console.log(req.body);
 });
 
-function getRoomsAtLocation(location) {
-  db.collection('rooms')
+createRoom('test', 50, {lat:0, lon:0});
+getRoomsAtLocation({lat:0, lon:0}).then(rooms => {
+  console.log(rooms);
+});
+
+function createRoom(name, radius, center) {
+  db.collection('rooms').add({
+    name: name,
+    radius: radius,
+    center: center,
+    participantCount: 1,
+  });
+}
+
+async function getRoomsAtLocation(location) {
+  var rooms = [];
+  await db
+    .collection('rooms')
     .get()
     .then((results) => {
       results.forEach((doc) => {
         const data = doc.data();
-        console.log(`${data.name}, ${data.radius}, ${data.participantCount}`);
+        const room = {
+          id: doc.id,
+          name: data.name,
+          radius: data.radius,
+          center: data.center,
+          participantCount: data.participantCount,
+        };
+
+        // calculate the distance from the input location to the center of each room
+        var dist = geolib.getDistance(location, data.center);
+        if (dist < room.radius) {
+          rooms.push(room);
+        }
       });
     });
-}
-
-function createRoom(name, size) {
-  db.collection('rooms').add({
-    name: name,
-    size: size,
-  });
+  return rooms;
 }
