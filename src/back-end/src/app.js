@@ -37,7 +37,11 @@ app.post('/get-rooms-in-area', jsonParser, function (req, res) {
 });
 
 app.post('/create-room', jsonParser, function (req, res) {
-  console.log(req.body);
+  createRoom(
+    req.body.roomName,
+    parseInt(req.body.roomRadius),
+    req.body.userPosition
+  );
 });
 
 // Firebase logic
