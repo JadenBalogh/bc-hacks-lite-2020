@@ -37,8 +37,7 @@ app.post('/create-room', jsonParser, function (req, res) {
   console.log(req.body);
 });
 
-createRoom('test', 50, {lat:0, lon:0});
-getRoomsAtLocation({lat:0, lon:0}).then(rooms => {
+getRoomsAtLocation({ lat: 0, lon: 0 }).then((rooms) => {
   console.log(rooms);
 });
 
@@ -49,6 +48,10 @@ function createRoom(name, radius, center) {
     center: center,
     participantCount: 1,
   });
+}
+
+function deleteRoom(id) {
+  db.collection('rooms').doc(id).delete();
 }
 
 async function getRoomsAtLocation(location) {
@@ -75,4 +78,32 @@ async function getRoomsAtLocation(location) {
       });
     });
   return rooms;
+}
+
+function addParticipantToRoom(id) {
+  var current = db
+    .collection('rooms')
+    .doc(id)
+    .get()
+    .then((result) => {
+      db.collection('rooms')
+        .doc(id)
+        .update({
+          participantCount: result.data().participantCount + 1,
+        });
+    });
+}
+
+function removeParticipantFromRoom(id) {
+  var current = db
+    .collection('rooms')
+    .doc(id)
+    .get()
+    .then((result) => {
+      db.collection('rooms')
+        .doc(id)
+        .update({
+          participantCount: result.data().participantCount - 1,
+        });
+    });
 }
