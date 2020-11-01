@@ -6,7 +6,8 @@
 Freedom is slavery,
 Ignorance is strength"
     />
-    <button v-on:click="getRoomsInMyArea">Get rooms in my area</button><br /><br />
+    <button v-on:click="getRoomsInMyArea">Get rooms in my area</button
+    ><br /><br />
     <button v-on:click="createNewRoom">Create room</button><br /><br />
     <input v-model="radius" placeholder="room radius in meters" />
     <input v-model="roomName" placeholder="room name" />
