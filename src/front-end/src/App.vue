@@ -17,11 +17,11 @@
     <!-- <img alt="Vue logo" src="./assets/logo.png" />-->
     <b-container class="" fluid>
       <b-row>
-        <b-col cols="2">
+        <b-col cols="4">
           <ChatRoomNav msg="Active Rooms" />
           <ChatRoomNav msg="Available Rooms" />
         </b-col>
-        <b-col cols="10"></b-col>
+        <b-col cols="8"></b-col>
       </b-row>
     </b-container>
     <button v-on:click="getLocation">Get my location</button>

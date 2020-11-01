@@ -1,12 +1,21 @@
 <template>
   <div class="chatRooms">
     <h4>{{ msg }}</h4>
+    <b-table hover :items="items"></b-table>
   </div>
 </template>
 
 <script>
 export default {
   name: "ChatRoomNav",
+  data() {
+    return {
+      items: [
+        { name: "Starbucks", diameter: 40 + "m", participants: 3 },
+        { name: "UBCO Campus", diameter: 10 + "km", participants: 50 },
+      ],
+    };
+  },
   props: {
     msg: String,
   },
