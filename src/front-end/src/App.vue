@@ -1,8 +1,15 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <button v-on:click="getRoomsInMyArea">Get my location</button>
+    <img alt="Vue logo" src="./assets/logo.png" width="40%" />
+    <HelloWorld
+      msg="War is peace,
+Freedom is slavery,
+Ignorance is strength"
+    />
+    <button v-on:click="getRoomsInMyArea">Get rooms in my area</button><br /><br />
+    <button v-on:click="createNewRoom">Create room</button><br /><br />
+    <input v-model="radius" placeholder="room radius in meters" />
+    <input v-model="roomName" placeholder="room name" />
   </div>
 </template>
 
@@ -15,16 +22,39 @@ export default {
   components: {
     HelloWorld,
   },
+  data: function () {
+    return {
+      radius: null,
+      roomName: "",
+    };
+  },
   methods: {
     getRoomsInMyArea() {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position.coords);
         axios({
           method: "post",
-          url: "http://localhost:3000",
+          url: "http://localhost:3000/get-rooms-in-area",
           data: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
+          },
+        });
+      });
+    },
+    createNewRoom() {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords);
+        axios({
+          method: "post",
+          url: "http://localhost:3000/create-room",
+          data: {
+            userPosition: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            roomRadius: this.radius,
+            roomName: this.roomName,
           },
         });
       });

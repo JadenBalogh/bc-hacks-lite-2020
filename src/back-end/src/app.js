@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   res.send('Hey there!');
 });
 
-app.post('/', jsonParser, function (req, res) {
+app.post('/get-rooms-in-area', jsonParser, function (req, res) {
+  console.log(req.body);
+});
+
+app.post('/create-room', jsonParser, function (req, res) {
   console.log(req.body);
 });
