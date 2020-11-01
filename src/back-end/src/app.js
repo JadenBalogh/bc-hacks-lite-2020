@@ -15,7 +15,7 @@ var db = firebase.firestore();
 const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
-var cors = require('cors')
+var cors = require('cors');
 const port = 3000;
 const jsonParser = bodyParser.json();
 app.use(cors());
