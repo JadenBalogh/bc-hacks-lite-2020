@@ -67,11 +67,13 @@ export default {
         console.log(position.coords);
         axios({
           method: "post",
-          url: "http://localhost:3000/get-rooms-in-area",
+          url: "http://localhost:3000/get-rooms-at-location",
           data: {
             lat: position.coords.latitude,
             long: position.coords.longitude,
           },
+        }).then(response => {
+          console.log(response);
         });
       });
     },

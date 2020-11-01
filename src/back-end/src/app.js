@@ -32,11 +32,17 @@ app.get('/', (req, res) => {
   res.send('Hey there!');
 });
 
-app.post('/get-rooms-in-area', jsonParser, function (req, res) {
-  console.log(req.body);
+app.post('/get-rooms-at-location', jsonParser, function (req, res) {
+  getRoomsAtLocation(req.body).then((rooms) => {
+    console.log(rooms);
+    res.send(rooms);
+  });
 });
 
 app.post('/create-room', jsonParser, function (req, res) {
+  console.log(req.body.roomName);
+  console.log(parseInt(req.body.roomRadius));
+  console.log(req.body.userPosition);
   createRoom(
     req.body.roomName,
     parseInt(req.body.roomRadius),
@@ -45,11 +51,6 @@ app.post('/create-room', jsonParser, function (req, res) {
 });
 
 // Firebase logic
-createRoom('test', 50, { lat: 0, lon: 0 });
-getRoomsAtLocation({ lat: 0, lon: 0 }).then((rooms) => {
-  console.log(rooms);
-});
-
 function createRoom(name, radius, center) {
   db.collection('rooms').add({
     name: name,
@@ -80,12 +81,15 @@ async function getRoomsAtLocation(location) {
         };
 
         // calculate the distance from the input location to the center of each room
+        console.log(location);
+        console.log(data.center);
         var dist = geolib.getDistance(location, data.center);
         if (dist < room.radius) {
           rooms.push(room);
         }
       });
     });
+  
   return rooms;
 }
 
