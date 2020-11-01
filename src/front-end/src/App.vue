@@ -76,7 +76,6 @@ export default {
             long: position.coords.longitude,
           },
         }).then(response => {
-
           console.log(response);
         });
       });
