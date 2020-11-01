@@ -73,6 +73,8 @@ export default {
             lat: position.coords.latitude,
             long: position.coords.longitude,
           },
+        }).then(response => {
+          console.log(response);
         });
       });
     },
