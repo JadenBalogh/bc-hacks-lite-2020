@@ -1,0 +1,9 @@
+Chat with your community - any time, anywhere. With GeoChat, you can create and join public geographically-based chatrooms to connect people in the same area; whether that be a coffee shop or a city.
+
+How GeoChat works is it allows you to chat with anyone within a physical radius of you. That could be the size of a coffee shop, a neighbourhood or a whole city. Simply open the app, and either join or create a chatroom based on your physical location and a given radius. Then, you can chat with anyone who has the app within that same defined area.
+
+For example, a student joins a GeoChat room created by another student for the UBCO library, and is able to chat with several other students who have also connected, facilitating meeting new people and rapidly creating a communication channel for localized events.
+
+Our project includes a server-side component able to add, update and delete chat rooms, as well as manage the geolocation and number of participants in each room. This interacts with our Firestore database to allow for easy data manipulation.
+
+On the front-end, we have a prototype of our interface including the list of nearby rooms and the messaging window. Users would see the available rooms for their physical location and join or create rooms as desired.
