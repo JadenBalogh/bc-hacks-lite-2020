@@ -4,7 +4,7 @@
       <b-navbar-brand href="#"
         ><img
           src="./assets/compass1.png"
-          style="width: 70px; height: auto"
+          style="width: 80px; margin-bottom: 15px"
           alt="compass"
         />
         <span class="mt-auto" style="font-size: xx-large">
