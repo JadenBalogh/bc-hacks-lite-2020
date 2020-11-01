@@ -37,10 +37,19 @@ app.post('/get-rooms-in-area', jsonParser, function (req, res) {
 });
 
 app.post('/create-room', jsonParser, function (req, res) {
-  console.log(req.body);
+  createRoom(
+    req.body.roomName,
+    parseInt(req.body.roomRadius),
+    req.body.userPosition
+  );
 });
 
 // Firebase logic
+createRoom('test', 50, { lat: 0, lon: 0 });
+getRoomsAtLocation({ lat: 0, lon: 0 }).then((rooms) => {
+  console.log(rooms);
+});
+
 function createRoom(name, radius, center) {
   db.collection('rooms').add({
     name: name,

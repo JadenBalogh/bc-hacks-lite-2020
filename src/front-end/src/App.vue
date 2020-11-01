@@ -69,8 +69,8 @@ export default {
           method: "post",
           url: "http://localhost:3000/get-rooms-in-area",
           data: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
+            lat: position.coords.latitude,
+            long: position.coords.longitude,
           },
         });
       });
@@ -83,8 +83,8 @@ export default {
           url: "http://localhost:3000/create-room",
           data: {
             userPosition: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
+              lat: position.coords.latitude,
+              long: position.coords.longitude,
             },
             roomRadius: this.radius,
             roomName: this.roomName,
