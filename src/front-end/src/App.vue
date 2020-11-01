@@ -24,7 +24,7 @@ export default {
           url: "http://localhost:3000",
           data: {
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+            longitude: position.coords.longitude,
           },
         });
       });
