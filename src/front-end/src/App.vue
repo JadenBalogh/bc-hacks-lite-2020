@@ -44,7 +44,6 @@ import ChatRoom from "./components/ChatRoom.vue";
 import moment from "moment";
 import { version } from "ant-design-vue";
 
-import HelloWorld from "./components/HelloWorld.vue";
 import * as axios from "axios";
 
 export default {
