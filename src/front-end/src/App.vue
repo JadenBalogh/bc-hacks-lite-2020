@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <b-navbar toggleable="lg" type="dark" variant="secondary">
       <b-navbar-brand href="#"
         ><img
@@ -28,14 +29,27 @@
     </b-container>
     <button v-on:click="getLocation">Get my location</button>
     <a-date-picker :defaultValue="moment()" />
+
+
+    <button v-on:click="getRoomsInMyArea">Get rooms in my area</button
+    ><br /><br />
+    <button v-on:click="createNewRoom">Create room</button><br /><br />
+    <input v-model="radius" placeholder="room radius in meters" />
+    <input v-model="roomName" placeholder="room name" />
+
   </div>
 </template>
 
 <script>
+
 import ChatRoomNav from "./components/ChatRoomNav.vue";
 import ChatRoom from "./components/ChatRoom.vue";
 import moment from "moment";
 import { version } from "ant-design-vue";
+=======
+import HelloWorld from "./components/HelloWorld.vue";
+import * as axios from "axios";
+
 
 export default {
   name: "App",
@@ -50,10 +64,41 @@ export default {
       version,
     };
   },
+  data: function () {
+    return {
+      radius: null,
+      roomName: "",
+    };
+  },
   methods: {
-    getLocation() {
+    getRoomsInMyArea() {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position.coords);
+        axios({
+          method: "post",
+          url: "http://localhost:3000/get-rooms-in-area",
+          data: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          },
+        });
+      });
+    },
+    createNewRoom() {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords);
+        axios({
+          method: "post",
+          url: "http://localhost:3000/create-room",
+          data: {
+            userPosition: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+            roomRadius: this.radius,
+            roomName: this.roomName,
+          },
+        });
       });
     },
   },
