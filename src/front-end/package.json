@@ -8,16 +8,13 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-
     "ant-design-vue": "^1.7.1",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
-=======
-    "axios": "^0.21.0",
-
     "core-js": "^3.6.5",
     "stream-chat": "^2.7.2",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-advanced-chat": "^0.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",
