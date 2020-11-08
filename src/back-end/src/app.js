@@ -23,6 +23,7 @@ const port = 3000;
 const jsonParser = bodyParser.json();
 app.use(cors());
 
+
 // Server logic
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
@@ -89,7 +90,7 @@ async function getRoomsAtLocation(location) {
         }
       });
     });
-  
+
   return rooms;
 }
 
@@ -120,3 +121,8 @@ function removeParticipantFromRoom(id) {
         });
     });
 }
+
+
+
+
+
