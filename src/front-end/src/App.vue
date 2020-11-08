@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <b-navbar toggleable="lg" type="dark" variant="secondary">
       <b-navbar-brand href="#"
         ><img
@@ -19,7 +18,7 @@
     <b-container class="" fluid>
       <b-row>
         <b-col cols="4">
-          <ChatRoomNav msg="Active Rooms" />
+          <ChatRoomNavActive msg="Active Rooms" />
           <ChatRoomNav msg="Available Rooms" />
         </b-col>
         <b-col cols="8">
@@ -27,60 +26,57 @@
         </b-col>
       </b-row>
     </b-container>
-    <button v-on:click="getLocation">Get my location</button>
-    <a-date-picker :defaultValue="moment()" />
+    <button v-on:click="getRoomsInMyArea">Get my location</button>
+    <!-- <a-date-picker :defaultValue="moment()" /> -->
 
-
-    <button v-on:click="getRoomsInMyArea">Get rooms in my area</button
+    <!-- <button v-on:click="getRoomsInMyArea">Get rooms in my area</button
     ><br /><br />
     <button v-on:click="createNewRoom">Create room</button><br /><br />
     <input v-model="radius" placeholder="room radius in meters" />
-    <input v-model="roomName" placeholder="room name" />
-
+    <input v-model="roomName" placeholder="room name" /> -->
   </div>
 </template>
 
 <script>
-
+import ChatRoomNavActive from "./components/ChatRoomNavActive.vue";
 import ChatRoomNav from "./components/ChatRoomNav.vue";
 import ChatRoom from "./components/ChatRoom.vue";
 import moment from "moment";
 import { version } from "ant-design-vue";
 
-import HelloWorld from "./components/HelloWorld.vue";
 import * as axios from "axios";
-
 
 export default {
   name: "App",
 
   components: {
+    ChatRoomNavActive,
     ChatRoomNav,
-    ChatRoom
+    ChatRoom,
   },
-  data() {
-    return {
-      moment,
-      version,
-    };
-  },
+
   data: function () {
     return {
       radius: null,
       roomName: "",
+      moment,
+      version,
     };
   },
   methods: {
     getRoomsInMyArea() {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position.coords);
+        alert("" + position.coords.latitude + ", " + position.coords.longitude);
         axios({
           method: "post",
-          url: "http://localhost:3000/get-rooms-in-area",
+          url: "http://localhost:3000/get-rooms-at-location",
           data: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
+            lat: position.coords.latitude,
+            long: position.coords.longitude,
           },
+        }).then(response => {
+          console.log(response);
         });
       });
     },
@@ -92,8 +88,8 @@ export default {
           url: "http://localhost:3000/create-room",
           data: {
             userPosition: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
+              lat: position.coords.latitude,
+              long: position.coords.longitude,
             },
             roomRadius: this.radius,
             roomName: this.roomName,

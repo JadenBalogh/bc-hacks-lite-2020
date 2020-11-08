@@ -7,14 +7,12 @@
 
 <script>
 export default {
-  name: "ChatRoomNav",
+  name: "ChatRoomNavActive",
   data() {
     return {
       items: [
         { name: "Starbucks", diameter: 40 + "m", participants: 3 },
         { name: "UBCO Campus", diameter: 10 + "km", participants: 50 },
-        { name: "Kelowna", diameter: 40 + "km", participants: 7000 },
-        { name: "UBCO Library", diameter: 150 + "m", participants: 24 },
       ],
     };
   },
